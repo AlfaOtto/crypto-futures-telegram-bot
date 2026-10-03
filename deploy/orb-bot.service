@@ -1,0 +1,15 @@
+# systemd unit for a Linux VPS: copy to /etc/systemd/system/orb-bot.service
+# then: sudo systemctl enable --now orb-bot && journalctl -u orb-bot -f
+[Unit]
+Description=ORB paper-trading bot
+After=network-online.target
+
+[Service]
+WorkingDirectory=/opt/crypto-futures-telegram-bot
+ExecStart=/opt/crypto-futures-telegram-bot/venv/bin/python bot.py
+Restart=always
+RestartSec=10
+User=bot
+
+[Install]
+WantedBy=multi-user.target
